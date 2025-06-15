@@ -87,14 +87,35 @@ export default function StockTradingApp() {
     return { canPurchase: true, reason: "" }
   }
 
-  // 주식 상승/하락에 따른 배경색 결정
-  const getStockBackgroundColor = (changePercent: number) => {
+  // 주식 상승/하락에 따른 세련된 스타일 결정
+  const getStockStyle = (changePercent: number) => {
     if (changePercent > 0) {
-      return "bg-red-900/30 border-red-700/50" // 상승: 빨강
+      return {
+        borderLeft: "border-l-4 border-l-red-500",
+        textColors: {
+          percent: "text-red-400",
+          change: "text-red-400",
+          icon: "text-red-400",
+        },
+      }
     } else if (changePercent < 0) {
-      return "bg-blue-900/30 border-blue-700/50" // 하락: 파랑
+      return {
+        borderLeft: "border-l-4 border-l-blue-500",
+        textColors: {
+          percent: "text-blue-400",
+          change: "text-blue-400",
+          icon: "text-blue-400",
+        },
+      }
     } else {
-      return "bg-gray-800 border-gray-700" // 보합: 기본
+      return {
+        borderLeft: "border-l-4 border-l-gray-600",
+        textColors: {
+          percent: "text-gray-400",
+          change: "text-gray-400",
+          icon: "text-gray-400",
+        },
+      }
     }
   }
 
@@ -207,12 +228,13 @@ export default function StockTradingApp() {
         <div className="space-y-3">
           {tradingSession.todayStocks.map((stock) => {
             const purchaseCheck = canPurchaseStock(stock, quantity)
+            const stockStyle = getStockStyle(stock.changePercent)
 
             return (
               <Dialog key={stock.id}>
                 <DialogTrigger asChild>
                   <Card
-                    className={`cursor-pointer transition-all hover:opacity-80 ${getStockBackgroundColor(stock.changePercent)}`}
+                    className={`cursor-pointer transition-all hover:bg-gray-750 bg-gray-800 border-gray-700 ${stockStyle.borderLeft}`}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
@@ -229,26 +251,16 @@ export default function StockTradingApp() {
                             {/* 오른쪽: 퍼센트(위), 변동금액(아래) */}
                             <div className="text-right">
                               {/* 퍼센트 - 위쪽, 크게 */}
-                              <div
-                                className={`text-lg font-bold mb-1 ${
-                                  stock.changePercent > 0
-                                    ? "text-red-300"
-                                    : stock.changePercent < 0
-                                      ? "text-blue-300"
-                                      : "text-gray-300"
-                                }`}
-                              >
+                              <div className={`text-lg font-bold mb-1 ${stockStyle.textColors.percent}`}>
                                 {stock.changePercent > 0 ? "+" : ""}
                                 {stock.changePercent}%
                               </div>
                               {/* 변동금액 - 아래쪽 */}
-                              <div
-                                className={`flex items-center justify-end gap-1 ${stock.change > 0 ? "text-red-400" : stock.change < 0 ? "text-blue-400" : "text-gray-400"}`}
-                              >
+                              <div className={`flex items-center justify-end gap-1 ${stockStyle.textColors.change}`}>
                                 {stock.change > 0 ? (
-                                  <TrendingUp className="w-3 h-3" />
+                                  <TrendingUp className={`w-3 h-3 ${stockStyle.textColors.icon}`} />
                                 ) : stock.change < 0 ? (
-                                  <TrendingDown className="w-3 h-3" />
+                                  <TrendingDown className={`w-3 h-3 ${stockStyle.textColors.icon}`} />
                                 ) : null}
                                 <span className="text-sm font-medium">
                                   {stock.change > 0 ? "+" : ""}

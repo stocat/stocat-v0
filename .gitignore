@@ -1,0 +1,69 @@
+# ┌──────────────────────────────────────────
+# │ macOS
+# └──────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100*
+.Trashes
+.PKInstallSandboxManager-SystemSoftware
+dist/*
+# (macOS용 빌드 산출물이 따로 있다면 추가로 명시)
+
+# ┌──────────────────────────────────────────
+# │ VS Code
+# └──────────────────────────────────────────
+.vscode/
+.history/
+*.code-workspace
+
+# ┌──────────────────────────────────────────
+# │ Node / React Native
+# └──────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Metro, watchman cache
+.expo/
+.expo-shared/
+.cache/
+# 환경 설정 파일 (민감 정보가 포함된 경우에만)
+/.env
+.env.*.local
+
+# ┌──────────────────────────────────────────
+# │ Android
+# └──────────────────────────────────────────
+/android/.gradle/
+/android/app/build/
+/android/build/
+/android/local.properties  # SDK 경로 등 로컬 설정
+
+# ┌──────────────────────────────────────────
+# │ iOS / Xcode
+# └──────────────────────────────────────────
+# CocoaPods
+/ios/Pods/
+/ios/Podfile.lock  # 필요에 따라 관리하지 않으면 무시
+# Xcode 빌드 아티팩트
+/ios/build/
+/build/
+/DerivedData/
+/*.xcworkspace
+!Podfile  # Podfile 자체는 커밋
+# 사용자별 설정
+xcuserdata/
+/*.xcuserstate
+*.moved-aside
+*.xcuserdatad
+
+# ┌──────────────────────────────────────────
+# │ 기타 IDE / 툴
+# └──────────────────────────────────────────
+.idea/
+*.swp
+*~.nib
+*.lock

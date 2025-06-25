@@ -31,10 +31,9 @@
 # 의존성 설치
 npm install
 
-# 개발 서버 실행
-npm run dev
+# ios app 실행
+npx expo start --ios
 
-# http://localhost:3000 에서 확인
 ```
 
 ## 📱 메인 화면
